@@ -27,7 +27,6 @@ public class EmoticonUI : UIPopup
     public void OnClick_Complete(PointerEventData data)
     {
         UIManager.UI.ClosePopupUI();
-        ConnectToNetwork.Instance.LoadFirstRoom();
     }
 
 }

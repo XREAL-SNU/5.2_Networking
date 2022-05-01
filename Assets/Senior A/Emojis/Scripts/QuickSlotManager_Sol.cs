@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XReal.XTown.Persistance;
 
 public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
 {
@@ -40,7 +39,6 @@ public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
         // Add References of Quick Slot Buttons to Static List
         for (int i = 0; i < _quickSlots.Count; i++)
         {
-            _quickSlots[i].fid = PlayerManager.Instance.Data.myFaces[i];
             _quickSlots[i].ButtonImage.sprite = _buttonIcons[_quickSlots[i].fid];
             s_quickSlots.Add(_quickSlots[i]);
         }
@@ -57,7 +55,6 @@ public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
             quickslotButton.ButtonImage.sprite = CurrentlySelected.ButtonImage.sprite;
             quickslotButton.ButtonText.text = CurrentlySelected.ButtonText.text;
             quickslotButton.fid = CurrentlySelected.fid;
-            SaveQuickSlots(quickslotButton.transform.GetSiblingIndex() - 1, quickslotButton.fid);
 
         }
         else
@@ -96,18 +93,9 @@ public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
         s_quickSlots[index].ButtonText.text = textBuf;
         s_quickSlots[index].fid = idBuf;
 
-        Debug.Log($"set #{quickslotButton.transform.GetSiblingIndex()} to fid#{quickslotButton.fid}");
-        Debug.Log($"set #{s_quickSlots[index].transform.GetSiblingIndex()} to fid#{s_quickSlots[index].fid}");
-        SaveQuickSlots(quickslotButton.transform.GetSiblingIndex() - 1, quickslotButton.fid);
-        SaveQuickSlots(s_quickSlots[index].transform.GetSiblingIndex() - 1, s_quickSlots[index].fid);
 
     }
 
-    public static void SaveQuickSlots(int idx, int fid)
-    {
-        PlayerManager.Instance.Data.myFaces[idx] = fid;
-        PlayerManager.Instance.SaveAllPlayerData();
-    }
     // Clear Buffer if Canvas is Clicked
     public void OnPointerClick(PointerEventData eventData)
     {

@@ -2942,7 +2942,6 @@ namespace Photon.Realtime
         /// <remarks>This method is essential to update the internal state of a LoadBalancingClient. Overriding methods must call base.OnStatusChanged.</remarks>
         public virtual void OnStatusChanged(StatusCode statusCode)
         {
-            //Debug.Log("OnStatusChanged: statusCode " + statusCode.ToString());
             switch (statusCode)
             {
                 case StatusCode.Connect:
