@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
 {
     // Reference(s) in Scene
     [SerializeField] List<QuickSlotButton_Sol> _quickSlots;
     [SerializeField] List<Sprite> _buttonIcons;
+    [SerializeField] List<Texture> _faceTextures;
+
     public Transform GridLayout;
 
     // Reference(s) in Directory    
     [SerializeField] GameObject _viewportButtonPrefab;
 
     public static QuickSlotButton_Sol CurrentlySelected;
-    static List<QuickSlotButton_Sol> s_quickSlots;
+    public static List<QuickSlotButton_Sol> s_quickSlots;
+    public static List<Texture> s_faceTextures;
 
     void Start()
     {
@@ -42,6 +46,12 @@ public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
             _quickSlots[i].ButtonImage.sprite = _buttonIcons[_quickSlots[i].fid];
             s_quickSlots.Add(_quickSlots[i]);
         }
+
+        s_faceTextures = new List<Texture>();
+        for(int i = 0; i < _faceTextures.Count; i++)
+        {
+            s_faceTextures.Add(_faceTextures[i]);
+        }
     }
 
     // Function to Add Button to Quick Slots
@@ -51,11 +61,9 @@ public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
 
         if(index == -1)
         {
-            Debug.Log($"set #{quickslotButton.transform.GetSiblingIndex()} to fid#{CurrentlySelected.fid}");
             quickslotButton.ButtonImage.sprite = CurrentlySelected.ButtonImage.sprite;
             quickslotButton.ButtonText.text = CurrentlySelected.ButtonText.text;
             quickslotButton.fid = CurrentlySelected.fid;
-
         }
         else
         {
@@ -92,9 +100,8 @@ public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
         s_quickSlots[index].ButtonImage.sprite = spriteBuf;
         s_quickSlots[index].ButtonText.text = textBuf;
         s_quickSlots[index].fid = idBuf;
-
-
     }
+
 
     // Clear Buffer if Canvas is Clicked
     public void OnPointerClick(PointerEventData eventData)

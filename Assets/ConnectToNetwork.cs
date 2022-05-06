@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using Cinemachine;
@@ -183,7 +184,7 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
                 returnColor = Color.blue;
                 break;
             default:
-                returnColor =  Color.black;
+                returnColor = Color.black;
                 break;
         }
         nowColor = returnColor;
