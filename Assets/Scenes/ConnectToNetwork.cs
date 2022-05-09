@@ -85,4 +85,17 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
 				// 이 줄은 지난 과제에서 cam을 어떻게 구현하셨는지에 따라 다를 수 잇습니다.
        // if (cam != null && player != null) cam.GetComponent<CinemachineVirtualCamera>().Follow = player.transform.Find("FollowTarget");
     }
+
+    public class PlayerAvatar : MonoBehaviour, IPunInstantiateMagicCallback
+{
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        // store this gameobject as this player's charater in Player.TagObject
+        info.Sender.TagObject = this.gameObject;
+    }
+
+
+
+  
+}
 }
