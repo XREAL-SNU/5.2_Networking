@@ -63,6 +63,10 @@ namespace Photon.Pun
     /// \ingroup publicApi
     public static partial class PhotonNetwork
     {
+
+
+    
+
         /// <summary>Version number of PUN. Used in the AppVersion, which separates your playerbase in matchmaking.</summary>
         public const string PunVersion = "2.40";
 
@@ -2757,6 +2761,8 @@ namespace Photon.Pun
                 Debug.LogError("Destroy(targetPhotonView) failed, cause targetPhotonView is null.");
             }
         }
+
+
 
         /// <summary>
         /// Network-Destroy the GameObject, unless it is static or not under this client's control.
