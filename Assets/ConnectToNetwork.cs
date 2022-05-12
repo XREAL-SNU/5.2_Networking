@@ -8,6 +8,7 @@ using Photon.Realtime;
 using Cinemachine;
 using StarterAssets;
 using ExitGames.Client.Photon;
+using DG.Tweening;
 public class ConnectToNetwork : MonoBehaviourPunCallbacks
 {
     public enum ColorEnum
@@ -19,7 +20,8 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
     public static ConnectToNetwork Instance = null;
     string nickname = "Player";
     string gameVersion = "0.0.1";
-    static bool isScene1;
+    bool isScene1;
+    bool hasCharacter;
     static Color nowColor;
     const string SUIT_COLOR_KEY = "SuitColor";
     Renderer suitRenderer;
@@ -43,6 +45,7 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
         nickname += $"{Random.Range(1, 1000)}";
         nowColor = Color.red;
+        hasCharacter = false;
         PhotonNetwork.NickName = nickname;
         PhotonNetwork.GameVersion = gameVersion;
         PhotonNetwork.ConnectUsingSettings();
@@ -63,6 +66,7 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
         if (Input.GetKeyDown(KeyCode.R)) SetColorProperty(ColorEnum.Red);
         if (Input.GetKeyDown(KeyCode.G)) SetColorProperty(ColorEnum.Green);
         if (Input.GetKeyDown(KeyCode.B)) SetColorProperty(ColorEnum.Blue);
+        
     }
 
     public override void OnConnectedToMaster()
@@ -74,7 +78,14 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("Joined Lobby");
-        PhotonNetwork.JoinRandomRoom();
+        if (!isScene1)
+        {
+            PhotonNetwork.JoinOrCreateRoom("RoomQ", new RoomOptions(),TypedLobby.Default);
+        }
+        else
+        {
+            PhotonNetwork.JoinOrCreateRoom("RoomE", new RoomOptions(), TypedLobby.Default);
+        }
     }
 
     public override void OnJoinedRoom()
@@ -89,6 +100,14 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
             else
             {
                 PhotonNetwork.LoadLevel("SceneE");
+            }
+        }
+        else
+        {
+            if(!hasCharacter)
+            {
+                hasCharacter = true;
+                InitializePlayer();
             }
         }
     }

@@ -567,6 +567,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1107.6987
       objectReference: {fileID: 0}
+    - target: {fileID: 8308419923523782779, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8308419923650123203, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -591,13 +595,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1107.6987
       objectReference: {fileID: 0}
+    - target: {fileID: 8308419923789853695, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 834692868}
+    - target: {fileID: 8308419923789853695, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 8308419923913486769, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
       propertyPath: m_Name
       value: EmoticonUI
       objectReference: {fileID: 0}
     - target: {fileID: 8308419923913486769, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8308419923913486773, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
       propertyPath: m_Pivot.x
@@ -695,6 +707,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8308419923913486775, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8308419924527433324, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -716,7 +732,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &834692868 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8308419923913486769, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8308419923523782779, guid: 40363e1046805af44bc2d297ed1aa93a, type: 3}
   m_PrefabInstance: {fileID: 834692866}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &947503901

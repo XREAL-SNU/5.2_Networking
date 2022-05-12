@@ -24,19 +24,20 @@ public class AvatarFaceControl : MonoBehaviour
     {
         if (!PhotonView.Get(this).IsMine) return;
         if (Input.GetKey(KeyCode.Alpha1))
-            PhotonView.Get(this).RPC("ShowFace", RpcTarget.All, (byte)0);
+            PhotonView.Get(this).RPC("ShowFace", RpcTarget.All, (byte)QuickSlotManager_Sol.s_quickSlots[0].fid);
         if (Input.GetKey(KeyCode.Alpha2))
-            PhotonView.Get(this).RPC("ShowFace", RpcTarget.All, (byte)1);
+            PhotonView.Get(this).RPC("ShowFace", RpcTarget.All, (byte)QuickSlotManager_Sol.s_quickSlots[1].fid);
         if (Input.GetKey(KeyCode.Alpha3))
-            PhotonView.Get(this).RPC("ShowFace", RpcTarget.All, (byte)2);
+            PhotonView.Get(this).RPC("ShowFace", RpcTarget.All, (byte)QuickSlotManager_Sol.s_quickSlots[2].fid);
         if (Input.GetKey(KeyCode.Alpha4))
-            PhotonView.Get(this).RPC("ShowFace", RpcTarget.All, (byte)3);
+            PhotonView.Get(this).RPC("ShowFace", RpcTarget.All, (byte)QuickSlotManager_Sol.s_quickSlots[3].fid);
     }
 
     public void ChangeFace(int faceIndex)
     {
         _avatarFace.SetTexture("_MainTex", QuickSlotManager_Sol.s_faceTextures[faceIndex]);
     }
+
     [PunRPC]
     void ShowFace(byte index)
     {
@@ -44,7 +45,8 @@ public class AvatarFaceControl : MonoBehaviour
         {
             StopCoroutine(_coroutine);
         }
-        _coroutine = ShowFaceCoroutine(QuickSlotManager_Sol.s_quickSlots[(int)index].fid);
+        //_coroutine = ShowFaceCoroutine(QuickSlotManager_Sol.s_quickSlots[(int)index].fid);
+        _coroutine = ShowFaceCoroutine(index);
         StartCoroutine(_coroutine);
     }
 
