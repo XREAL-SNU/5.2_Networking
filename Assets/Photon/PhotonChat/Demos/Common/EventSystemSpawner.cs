@@ -10,6 +10,9 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
 namespace Photon.Chat.UtilityScripts
 {
@@ -20,7 +23,11 @@ namespace Photon.Chat.UtilityScripts
     public class EventSystemSpawner : MonoBehaviour
     {
         void OnEnable()
+
+        
         {
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
             #if ENABLE_INPUT_SYSTEM && !ENABLE_LEGACY_INPUT_MANAGER
             Debug.LogError("PUN Demos are not compatible with the New Input System, unless you enable \"Both\" in: Edit > Project Settings > Player > Active Input Handling. Pausing App.");
             Debug.Break();
@@ -36,5 +43,48 @@ namespace Photon.Chat.UtilityScripts
                 eventSystem.AddComponent<StandaloneInputModule>();
             }
         }
+
+        void OnDisable()
+        {
+
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+
+
+
+
+        }
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+             if(PhotonNetwork.OfflineMode || PhotonNetwork.InRoom)
+              {
+        InitializePlayer();
+         }
+
+
+
+        }
+
+         void InitializePlayer()
+    {
+				//Resources.Load는 Resources폴더 안에서 주어진 경로의 prefab을 찾는데 이용
+        var prefab = (GameObject)Resources.Load("PhotonPrefab/PlayerFollowCamera");
+        var cam = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        cam.name = "PlayerFollowCamera";
+
+        // instantiate player and link camera
+				// PhotonNetwork.Instantiate 에 바로 경로를 주는 경우에도 Resources 밑의 경로만 사용.
+        var player = PhotonNetwork.Instantiate("PhotonPrefab/CharacterPrefab", Vector3.zero, Quaternion.identity);
+				// 이 줄은 지난 과제에서 cam을 어떻게 구현하셨는지에 따라 다를 수 잇습니다.
+       // if (cam != null && player != null) cam.GetComponent<CinemachineVirtualCamera>().Follow = player.transform.Find("FollowTarget");
     }
+
+   
+
+
+
+
+
+    }
+
 }
