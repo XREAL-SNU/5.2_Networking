@@ -18,6 +18,32 @@ namespace StarterAssets
                 base.Awake();
             }
         }
+
+        protected override void LateUpdate()
+        {
+            if (_view.IsMine)
+            {
+                base.LateUpdate();
+            }
+        }
+
+
+        protected override void Start()
+        {
+            if (_view.IsMine)
+            {
+                base.Start();
+            }
+        }
+
+        protected override void Update()
+        {
+            if (_view.IsMine)
+            {
+                base.Update();
+            }
+        }
+
     }
 }
 

@@ -9,7 +9,7 @@ using Cinemachine;
 public class ConnectToNetwork : MonoBehaviourPunCallbacks
 {
     public static ConnectToNetwork Instance = null;
-    string nickname = "Your NickName";
+    string nickname = "Player";
     string gameVersion = "0.0.1";
     private string SceneNameToLoad;
 
@@ -41,6 +41,7 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+        nickname += $"{Random.Range(1, 1000)}";
         PhotonNetwork.NickName = nickname;
         PhotonNetwork.GameVersion = gameVersion;
         PhotonNetwork.ConnectUsingSettings(); // 마스터 서버와 연결시킵니다
@@ -72,7 +73,14 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby() // 로비에 접속했을 때
     {
-        PhotonNetwork.JoinRandomRoom(); // 룸으로 접속하기
+        if (SceneNameToLoad == "SceneQ")
+        {
+            PhotonNetwork.JoinOrCreateRoom("RoomQ", new RoomOptions(), TypedLobby.Default);
+        }
+        else
+        {
+            PhotonNetwork.JoinOrCreateRoom("RoomE", new RoomOptions(), TypedLobby.Default);
+        }
     }
 
     public override void OnJoinedRoom()
@@ -84,6 +92,10 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
         {
             // Must load level with PhotonNetwork.LoadLevel, not SceneManager.LoadScene
             PhotonNetwork.LoadLevel(SceneNameToLoad);
+        }
+        else
+        {
+            InitializePlayer();
         }
     }
 
@@ -124,7 +136,11 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
         // PhotonNetwork.Instantiate 에 바로 경로를 주는 경우에도 Resources 밑의 경로만 사용.
         var player = PhotonNetwork.Instantiate("PhotonPrefab/CharacterPrefab", Vector3.zero, Quaternion.identity);
         // 이 줄은 지난 과제에서 cam을 어떻게 구현하셨는지에 따라 다를 수 잇습니다.
-        if (cam != null && player != null) cam.GetComponent<CinemachineVirtualCamera>().Follow = player.transform.Find("FollowTarget");
+        if (cam != null && player != null)
+        {
+            cam.GetComponent<CinemachineVirtualCamera>().Follow = player.transform.Find("FollowTarget");
+            player.GetComponent<StarterAssets.ThirdPersonControllerMulti>().CinemachineCameraTarget = cam;
+        }
     }
 
     public override void OnEnable()

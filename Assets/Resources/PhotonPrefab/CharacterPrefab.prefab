@@ -2499,9 +2499,11 @@ GameObject:
   - component: {fileID: 1291911440891694393}
   - component: {fileID: 1484546162389781765}
   - component: {fileID: 7020429084099248560}
-  - component: {fileID: 6544359651235912994}
   - component: {fileID: 8974314364849444456}
   - component: {fileID: -1792788942810242038}
+  - component: {fileID: 4570598818754251313}
+  - component: {fileID: 2943325963674269495}
+  - component: {fileID: 7965564400416660418}
   m_Layer: 9
   m_Name: CharacterPrefab
   m_TagString: Player
@@ -2610,8 +2612,8 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   analogMovement: 0
-  cursorLocked: 0
-  cursorInputForLook: 0
+  cursorLocked: 1
+  cursorInputForLook: 1
 --- !u!114 &7020429084099248560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2630,22 +2632,12 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 2943325963674269495}
+  - {fileID: 7965564400416660418}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6544359651235912994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4142847262815404090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e7e81f6a69c3422da202c1241bea4dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8974314364849444456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2691,6 +2683,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _avatarFace: {fileID: 2100000, guid: 4cbbf307fcd6d974db7a6b7254415c34, type: 2}
   _defaultTexture: {fileID: 2800000, guid: e20e4a6f4ff73424dad9a9852996b8d3, type: 3}
+--- !u!114 &4570598818754251313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142847262815404090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7e81f6a69c3422da202c1241bea4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2943325963674269495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142847262815404090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &7965564400416660418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142847262815404090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 1
+    SynchronizeType: 0
+    Name: Speed
+  - Type: 4
+    SynchronizeType: 0
+    Name: Jump
+  - Type: 4
+    SynchronizeType: 0
+    Name: Grounded
+  - Type: 4
+    SynchronizeType: 0
+    Name: FreeFall
+  - Type: 1
+    SynchronizeType: 0
+    Name: MotionSpeed
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &4252053785439907878
 GameObject:
   m_ObjectHideFlags: 0
