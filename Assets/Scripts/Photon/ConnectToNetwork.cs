@@ -12,6 +12,18 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
     string nickname = "Your NickName";
     string gameVersion = "0.0.1";
     private string SceneNameToLoad;
+
+    Renderer suitRenderer;
+
+    const string SUIT_COLOR_KEY = "SuitColor";
+
+    public enum ColorEnum
+    {
+        Red,
+        Green,
+        Blue
+    }
+
     private void Awake()
     {
         if (Instance == null)
@@ -48,6 +60,9 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
             SceneNameToLoad = "SceneE";
             PhotonNetwork.LeaveRoom();
         }
+        if (Input.GetKeyDown(KeyCode.R)) SetColorProperty(ColorEnum.Red);
+        if (Input.GetKeyDown(KeyCode.G)) SetColorProperty(ColorEnum.Green);
+        if (Input.GetKeyDown(KeyCode.B)) SetColorProperty(ColorEnum.Blue);
     }
 
     public override void OnConnectedToMaster() // 마스터와 연결되었을 때
@@ -125,4 +140,34 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
     }
 
 
+
+    public void SetSuitColor(Player player, ColorEnum col)
+    {
+        MaterialPropertyBlock block = new MaterialPropertyBlock();
+        block.SetColor("_Color", ToColor(col.ToString()));
+
+        // get the renderer of the player
+        GameObject playerGo = (GameObject)player.TagObject;
+        suitRenderer = playerGo.transform.Find("Space_Suit/Tpose_/Man_Suit/Body").GetComponent<Renderer>();
+
+        suitRenderer.SetPropertyBlock(block);
+    }
+
+    private Color ToColor(string color)
+    {
+        return (Color)typeof(Color).GetProperty(color.ToLowerInvariant()).GetValue(null, null);
+    }
+
+    public void SetColorProperty(ColorEnum col)
+    {
+        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { SUIT_COLOR_KEY, col } });
+    }
+
+    public override void OnPlayerPropertiesUpdate(Player player, ExitGames.Client.Photon.Hashtable updatedProps)
+    {
+        if (updatedProps.ContainsKey(SUIT_COLOR_KEY))
+        {
+            SetSuitColor(player, (ColorEnum)updatedProps[SUIT_COLOR_KEY]);
+        }
+    }
 }

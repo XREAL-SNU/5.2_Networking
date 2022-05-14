@@ -2501,6 +2501,7 @@ GameObject:
   - component: {fileID: 7020429084099248560}
   - component: {fileID: 6544359651235912994}
   - component: {fileID: 8974314364849444456}
+  - component: {fileID: -1792788942810242038}
   m_Layer: 9
   m_Name: CharacterPrefab
   m_TagString: Player
@@ -2676,6 +2677,20 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+--- !u!114 &-1792788942810242038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142847262815404090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0c7e79aca56e4981b09552b4c00066b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _avatarFace: {fileID: 2100000, guid: 4cbbf307fcd6d974db7a6b7254415c34, type: 2}
+  _defaultTexture: {fileID: 2800000, guid: e20e4a6f4ff73424dad9a9852996b8d3, type: 3}
 --- !u!1 &4252053785439907878
 GameObject:
   m_ObjectHideFlags: 0
