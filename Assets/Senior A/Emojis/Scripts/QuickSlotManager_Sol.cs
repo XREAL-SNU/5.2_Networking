@@ -8,20 +8,23 @@ public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
     // Reference(s) in Scene
     [SerializeField] List<QuickSlotButton_Sol> _quickSlots;
     [SerializeField] List<Sprite> _buttonIcons;
+    [SerializeField] List<Texture> _faceTextures;
     public Transform GridLayout;
+
+    public static List<Texture> s_faceTextures;
 
     // Reference(s) in Directory    
     [SerializeField] GameObject _viewportButtonPrefab;
 
     public static QuickSlotButton_Sol CurrentlySelected;
-    static List<QuickSlotButton_Sol> s_quickSlots;
+    public static List<QuickSlotButton_Sol> s_quickSlots;
 
     void Start()
     {
         GameObject buttonInstance;
         QuickSlotButton_Sol buttonProp;
 
-        for(int i = 0; i < _buttonIcons.Count; i++)
+        for (int i = 0; i < _buttonIcons.Count; i++)
         {
             // Instantiate at Start of Game
             buttonInstance = Instantiate(_viewportButtonPrefab, GridLayout);
@@ -42,6 +45,13 @@ public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
             _quickSlots[i].ButtonImage.sprite = _buttonIcons[_quickSlots[i].fid];
             s_quickSlots.Add(_quickSlots[i]);
         }
+
+        // _faceTextures의 값 모두 추가
+        s_faceTextures = new List<Texture>();
+        for (int i = 0; i < _faceTextures.Count; i++)
+        {
+            s_faceTextures.Add(_faceTextures[i]);
+        }
     }
 
     // Function to Add Button to Quick Slots
@@ -49,7 +59,7 @@ public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
     {
         int index = CheckDistinct();
 
-        if(index == -1)
+        if (index == -1)
         {
             Debug.Log($"set #{quickslotButton.transform.GetSiblingIndex()} to fid#{CurrentlySelected.fid}");
             quickslotButton.ButtonImage.sprite = CurrentlySelected.ButtonImage.sprite;
@@ -69,7 +79,7 @@ public class QuickSlotManager_Sol : MonoBehaviour, IPointerClickHandler
     {
         int retVal = -1;
 
-        for(int i = 0; i < s_quickSlots.Count; i++)
+        for (int i = 0; i < s_quickSlots.Count; i++)
         {
             if (s_quickSlots[i].fid == CurrentlySelected.fid)
                 retVal = i;

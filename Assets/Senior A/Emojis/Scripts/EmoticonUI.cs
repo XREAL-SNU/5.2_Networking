@@ -20,12 +20,15 @@ public class EmoticonUI : UIPopup
     public override void Init()
     {
         Bind<Image>(typeof(Images));
-        GetUIComponent<Image>((int)Images.ExitButton).gameObject.BindEvent(OnClick_Complete);
+        //GetUIComponent<Image>((int)Images.ExitButton).gameObject.BindEvent(OnClick_Complete);
+        //Debug.Log(GetUIComponent<Image>((int)Images.ExitButton).gameObject);
+
     }
 
-        
+
     public void OnClick_Complete(PointerEventData data)
     {
+        Debug.Log("close");
         UIManager.UI.ClosePopupUI();
     }
 
