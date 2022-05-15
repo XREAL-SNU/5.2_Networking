@@ -12,8 +12,9 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
     string nickname = "Player";
     string gameVersion = "0.0.1";
     private string SceneNameToLoad;
-
+    GameObject heart;
     Renderer suitRenderer;
+    bool isInitiated;
 
     const string SUIT_COLOR_KEY = "SuitColor";
 
@@ -45,6 +46,7 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = nickname;
         PhotonNetwork.GameVersion = gameVersion;
         PhotonNetwork.ConnectUsingSettings(); // 마스터 서버와 연결시킵니다
+        isInitiated = false;
     }
 
     private void Update()
@@ -64,6 +66,8 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
         if (Input.GetKeyDown(KeyCode.R)) SetColorProperty(ColorEnum.Red);
         if (Input.GetKeyDown(KeyCode.G)) SetColorProperty(ColorEnum.Green);
         if (Input.GetKeyDown(KeyCode.B)) SetColorProperty(ColorEnum.Blue);
+
+
     }
 
     public override void OnConnectedToMaster() // 마스터와 연결되었을 때
@@ -79,6 +83,7 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
         }
         else
         {
+
             PhotonNetwork.JoinOrCreateRoom("RoomE", new RoomOptions(), TypedLobby.Default);
         }
     }
@@ -93,10 +98,7 @@ public class ConnectToNetwork : MonoBehaviourPunCallbacks
             // Must load level with PhotonNetwork.LoadLevel, not SceneManager.LoadScene
             PhotonNetwork.LoadLevel(SceneNameToLoad);
         }
-        else
-        {
-            InitializePlayer();
-        }
+
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
